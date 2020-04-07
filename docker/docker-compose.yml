@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+    - 43306:3306
+  dbflute-hands-on-git:
+    image: alpine/git
+    volumes:
+      - ../dbflute_hands_on:/git/dbflute_hands_on
+    command: clone https://github.com/dbflute-session/dbflute-hands-on.git dbflute_hands_on
+  setup-hands-on:
+    image: maven:3-jdk-8
+    volumes:
+      - ../dbflute_hands_on:/usr/dbflute_hands_on
+      - ./setup-hands-on/entrypoint.sh:/var/entrypoint.sh
+    working_dir: /usr/dbflute_hands_on
+    entrypoint: /var/entrypoint.sh
+    depends_on:
+      - mysql
+      - dbflute-hands-on-git
