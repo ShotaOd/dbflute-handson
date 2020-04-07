@@ -19,8 +19,8 @@ cp tutorial/material/eclipse/prototype-pom.xml ./pom.xml
 echo '=================================================='
 echo '𝄞 setup DBFlute ♪ install DBFlute Client'
 echo '=================================================='
-mvn -e dbflute:download
-mvn -e dbflute:create-client
+mvn -q -e dbflute:download
+mvn -q -e dbflute:create-client
 
 echo '=================================================='
 echo '𝄞 setup DBFlute ♪ adjust DBFlute Property'
